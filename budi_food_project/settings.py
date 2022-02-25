@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     # In project applications
+    'users_api',
     'yemeksepeti_api',
     'getiryemek_api',
     'trendyolyemek_api',
@@ -127,6 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'users_api.UserProfile'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
