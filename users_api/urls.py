@@ -3,5 +3,5 @@ from users_api import views
 
 
 urlpatterns = [
-    path('hello-view/', views.HelloApiView.as_view()),
+    path('operations/', views.UserApiView.as_view()),
 ]

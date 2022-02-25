@@ -4,23 +4,23 @@ from rest_framework import status
 from users_api import serializers
 
 
-class HelloApiView(APIView):
-    """Test API View"""
+class UserApiView(APIView):
+    """API View for the operations to manage users"""
     serializer_class = serializers.HelloSerializer
 
     def get(self, requset, format=None):
-        """Returns a list of APIView features"""
-        an_apiview = [
+        """Returns a list of features of this APIView"""
+        description = [
             'Uses HTTP methods as function (get, post, patch, put, delete)',
             'Is similar to a traditional django view',
             'Gives you the most control over you application logic',
             'Is mapped manually to URLs',
         ]
 
-        return Response({'message': 'Hello!', 'an_apiview': an_apiview})
+        return Response({'message': 'Hello from UserApiView', 'description': description})
 
     def post(self, request):
-        """Create a hello message with our name"""
+        """Create a with given details"""
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
