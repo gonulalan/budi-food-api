@@ -9,6 +9,7 @@ from rest_framework import filters
 from users_api import permissions
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
+from rest_framework.permissions import IsAuthenticated
 
 
 class UserApiView(APIView):
@@ -112,6 +113,7 @@ class UserLoginApiView(ObtainAuthToken):
 class UserFeedItemViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating user feed items"""
     authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnFeedItem, IsAuthenticated)
     serializer_class = serializers.UserFeedItemSerializer
     queryset = models.UserFeedItem.objects.all()
 

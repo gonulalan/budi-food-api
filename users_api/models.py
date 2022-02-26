@@ -93,19 +93,11 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         """Return string representation of user"""
-        return self.email
-
-
-class UserFeedItem(models.Model):
-    """Profile status update"""
-    user_profile = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    status_text = models.CharField(max_length=255)
-    created_on = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        """Return the model as a string"""
-        return self.status_text
+        description = [self.company_sign_name,
+                       self.company_official_name, f'{self.first_name} {self.last_name}', self.email]
+        description = [a for a in description if a is not None]
+        # f'{self.company_sign_name} - {self.company_official_name}' if self.company_official_name and self.company_sign_name else f'{self.first_name} {self.last_name}'
+        return ' - '.join(description)
 
 
 class Platform(models.Model):
@@ -114,3 +106,20 @@ class Platform(models.Model):
     platform_short_name = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     REQUIRED_FIELDS = ['platform_name', 'platform_short_name']
+
+    def __str__(self):
+        """Return the model as a string"""
+        return self.platform_name
+
+
+class UserFeedItem(models.Model):
+    """Profile status update"""
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return the model as a string"""
+        return self.status_text

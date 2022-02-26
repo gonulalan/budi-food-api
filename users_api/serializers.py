@@ -69,8 +69,9 @@ class UserFeedItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserFeedItem
-        fields = ('id', 'user_profile', 'status_text', 'created_on')
-        extra_kwargs = {'user-profile': {'read_only': True}}
+        fields = ('id', 'user_profile', 'platform',
+                  'status_text', 'created_on')
+        extra_kwargs = {'user_profile': {'read_only': True}}
 
 
 class PlatformSerializer(serializers.ModelSerializer):
