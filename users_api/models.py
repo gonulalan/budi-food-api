@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
+from datetime import datetime
 
 # Create your models here.
 
@@ -9,14 +11,14 @@ from django.contrib.auth.models import BaseUserManager
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
-    def create_user(self, email, first_name, last_name, password=None):
+    def create_user(self, email, first_name, last_name, identity_id, password=None):
         """Create a new user profile"""
         if not email:
             raise ValueError('User must have an email address')
 
         email = self.normalize_email(email)
         user = self.model(email=email, first_name=first_name,
-                          last_name=last_name)
+                          last_name=last_name, identity_id=identity_id)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -35,18 +37,45 @@ class UserProfileManager(BaseUserManager):
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
+    subscription_date = models.DateTimeField(default=datetime.now)
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    identity_id = models.CharField(max_length=20)
-    company_sign_name = models.CharField(max_length=255)
-    company_official_name = models.CharField(max_length=255)
-    company_address = models.CharField(max_length=500)
+    identity_id = models.CharField(
+        max_length=20, null=True, default=None, )
+    company_sign_name = models.CharField(
+        max_length=255, null=True, default=None, )
+    company_official_name = models.CharField(
+        max_length=255, null=True, default=None, )
+    company_address = models.CharField(
+        max_length=500, null=True, default=None, )
+    company_city = models.CharField(
+        max_length=255, null=True, default=None, )
+    company_district = models.CharField(
+        max_length=255, null=True, default=None, )
+    company_neighborhood = models.CharField(
+        max_length=255, null=True, default=None, )
+    company_tax_id = models.CharField(
+        max_length=20, null=True, default=None, )
+    company_tax_administration = models.CharField(
+        max_length=255, null=True, default=None, )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     yemeksepeti_subscription = models.BooleanField(default=False)
+    yemeksepeti_api_secret = models.CharField(
+        max_length=255, null=True, default=None, )
+    yemeksepeti_api_key = models.CharField(
+        max_length=255, null=True, default=None, )
     getiryemek_subscription = models.BooleanField(default=False)
+    getiryemek_api_secret = models.CharField(
+        max_length=255, null=True, default=None, )
+    getiryemek_api_key = models.CharField(
+        max_length=255, null=True, default=None, )
     trendyolyemek_subscription = models.BooleanField(default=False)
+    trendyolyemek_api_secret = models.CharField(
+        max_length=255, null=True, default=None, )
+    trendyolyemek_api_key = models.CharField(
+        max_length=255, null=True, default=None, )
     mobile_application_subscription = models.BooleanField(default=False)
 
     objects = UserProfileManager()
@@ -65,3 +94,23 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """Return string representation of user"""
         return self.email
+
+
+class UserFeedItem(models.Model):
+    """Profile status update"""
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return the model as a string"""
+        return self.status_text
+
+
+class Platform(models.Model):
+    """Platforms that supported by api"""
+    platform_name = models.CharField(max_length=255)
+    platform_short_name = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+    REQUIRED_FIELDS = ['platform_name', 'platform_short_name']

@@ -5,6 +5,8 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register('operations', views.UserViewSet, basename='operations')
 router.register('profile', views.UserProfileViewSet)
+router.register('feed', views.UserFeedItemViewSet)
+router.register('platform', views.PlatformViewSet)
 
 urlpatterns = [
     path('api-view/', views.UserApiView.as_view()),
