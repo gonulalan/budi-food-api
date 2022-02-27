@@ -11,7 +11,7 @@ from datetime import datetime
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
-    def create_user(self, email, first_name, last_name, identity_id, password=None):
+    def create_user(self, email, first_name, last_name, password=None):
         """Create a new user profile"""
         if not email:
             raise ValueError('User must have an email address')
