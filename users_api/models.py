@@ -46,36 +46,36 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     company_sign_name = models.CharField(
         max_length=255, null=True, blank=True, default=None)
     company_official_name = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     company_address = models.CharField(
-        max_length=500, null=True, blank=True default=None)
+        max_length=500, null=True, blank=True, default=None)
     company_city = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     company_district = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     company_neighborhood = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     company_tax_id = models.CharField(
-        max_length=20, null=True, blank=True default=None)
+        max_length=20, null=True, blank=True, default=None)
     company_tax_administration = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     yemeksepeti_subscription = models.BooleanField(default=False)
     yemeksepeti_api_secret = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     yemeksepeti_api_key = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     getiryemek_subscription = models.BooleanField(default=False)
     getiryemek_api_secret = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     getiryemek_api_key = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     trendyolyemek_subscription = models.BooleanField(default=False)
     trendyolyemek_api_secret = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     trendyolyemek_api_key = models.CharField(
-        max_length=255, null=True, blank=True default=None)
+        max_length=255, null=True, blank=True, default=None)
     mobile_application_subscription = models.BooleanField(default=False)
 
     objects = UserProfileManager()
