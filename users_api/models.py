@@ -11,7 +11,30 @@ from datetime import datetime
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
-    def create_user(self, email, first_name, last_name, password=None):
+    def create_user(self,
+                    email,
+                    first_name,
+                    last_name,
+                    password=None,
+                    identity_id=None,
+                    company_sign_name=None,
+                    company_official_name=None,
+                    company_address=None,
+                    company_city=None,
+                    company_district=None,
+                    company_neighborhood=None,
+                    company_tax_id=None,
+                    company_tax_administration=None,
+                    yemeksepeti_subscription=False,
+                    yemeksepeti_api_secret=None,
+                    yemeksepeti_api_key=None,
+                    getiryemek_subscription=False,
+                    getiryemek_api_secret=None,
+                    getiryemek_api_key=None,
+                    trendyolyemek_subscription=False,
+                    trendyolyemek_api_secret=None,
+                    trendyolyemek_api_key=None,
+                    mobile_application_subscription=False):
         """Create a new user profile"""
         if not email:
             raise ValueError('User must have an email address')
