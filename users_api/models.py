@@ -16,6 +16,8 @@ class UserProfileManager(BaseUserManager):
                     first_name,
                     last_name,
                     password=None,
+                    is_active=True,
+                    is_staff=False,
                     identity_id=None,
                     company_sign_name=None,
                     company_official_name=None,

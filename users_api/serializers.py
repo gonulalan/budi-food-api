@@ -14,8 +14,32 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserProfile
-        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'identity_id', 'company_sign_name', 'company_official_name', 'company_address', 'company_city', 'company_district', 'company_neighborhood', 'company_tax_id', 'company_tax_administration',
-                  'yemeksepeti_subscription', 'yemeksepeti_api_secret', 'yemeksepeti_api_key', 'getiryemek_subscription', 'getiryemek_api_secret', 'getiryemek_api_key', 'trendyolyemek_subscription', 'trendyolyemek_api_secret', 'trendyolyemek_api_key', 'mobile_application_subscription')
+        fields = ('id',
+                  'email',
+                  'first_name',
+                  'last_name',
+                  'password',
+                  'is_active',
+                  'is_staff',
+                  'identity_id',
+                  'company_sign_name',
+                  'company_official_name',
+                  'company_address',
+                  'company_city',
+                  'company_district',
+                  'company_neighborhood',
+                  'company_tax_id',
+                  'company_tax_administration',
+                  'yemeksepeti_subscription',
+                  'yemeksepeti_api_secret',
+                  'yemeksepeti_api_key',
+                  'getiryemek_subscription',
+                  'getiryemek_api_secret',
+                  'getiryemek_api_key',
+                  'trendyolyemek_subscription',
+                  'trendyolyemek_api_secret',
+                  'trendyolyemek_api_key',
+                  'mobile_application_subscription')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -32,6 +56,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             password=validated_data['password'],
+            is_active=validated_data['is_active'],
+            is_staff=validated_data['is_staff'],
             identity_id=validated_data['identity_id'],
             company_sign_name=validated_data['company_sign_name'],
             company_official_name=validated_data['company_official_name'],
