@@ -40,6 +40,8 @@ class UserApiView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def put(self, request, pk=None):
         """Handle updating an object"""
         return Response({'method': 'PUT'})
