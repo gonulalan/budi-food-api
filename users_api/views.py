@@ -37,6 +37,7 @@ class UserApiView(APIView):
             email = serializer.validated_data.get('email')
             message = f'Hello {first_name}'
             return Response({'message': message})
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
