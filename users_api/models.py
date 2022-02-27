@@ -41,7 +41,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    identity_id = models.CharField(max_length=20, null=True, blank=True default=None)
+    identity_id = models.CharField(
+        max_length=20, null=True, blank=True, default=None)
     company_sign_name = models.CharField(
         max_length=255, null=True, blank=True, default=None)
     company_official_name = models.CharField(
