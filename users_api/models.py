@@ -96,7 +96,6 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         description = [self.company_sign_name,
                        self.company_official_name, f'{self.first_name} {self.last_name}', self.email]
         description = [a for a in description if a is not None]
-        # f'{self.company_sign_name} - {self.company_official_name}' if self.company_official_name and self.company_sign_name else f'{self.first_name} {self.last_name}'
         return ' - '.join(description)
 
 
@@ -122,4 +121,4 @@ class UserFeedItem(models.Model):
 
     def __str__(self):
         """Return the model as a string"""
-        return self.status_text
+        return f'{self.platform} - {self.status_text}'
